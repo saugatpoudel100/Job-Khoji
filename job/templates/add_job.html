@@ -1,0 +1,79 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'recruiter_navigation.html' %}
+
+<marquee style="font-family: 'Monotype Corsiva'; font-size: 25px; color: white; background-color: #010913; font-weight: bold; margin-top: 1%;">
+    Add Job Details
+</marquee>
+<!-- <hr style="border: 2px solid #007bff;"> -->
+<hr>
+<form class="container mt-3" onsubmit="return checkpass();" name="signup" method="post" enctype="multipart/form-data" style="max-width: 600px; background-color: #f8f9fa; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label style="font-weight: bold;">Job Title</label>
+        <input type="text" class="form-control" name="jobtitle" placeholder="Enter Job Title" required>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label style="font-weight: bold;">Start Date</label>
+            <input type="date" class="form-control" name="startdate" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label style="font-weight: bold;">End Date</label>
+            <input type="date" class="form-control" name="enddate" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label style="font-weight: bold;">Salary (Per Month)</label>
+            <input type="text" class="form-control" name="salary" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label style="font-weight: bold;">Company Logo</label>
+            <input type="file" class="form-control" name="logo" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label style="font-weight: bold;">Experience (In Years)</label>
+            <input type="text" class="form-control" name="experience" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label style="font-weight: bold;">Company Location</label>
+            <input type="text" class="form-control" name="location" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label style="font-weight: bold;">Skills</label>
+        <input type="text" class="form-control" name="skills" placeholder="Skills Required" required>
+    </div>
+
+    <div class="form-group">
+        <label style="font-weight: bold;">Description</label>
+        <textarea class="form-control" name="description" rows="4" required></textarea>
+    </div>
+
+    <input type="submit" class="btn btn-primary my-3" style="width: 100%; height: 45px; font-size: 18px;" value="Add Job">
+</form>
+
+{% if error == "no" %}
+<script>
+    alert("Job detail has been added.");
+    window.location.href = ("{% url 'job_list' %}");
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("Something went wrong");
+</script>
+{% endif %}
+
+{% endblock %}

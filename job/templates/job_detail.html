@@ -1,0 +1,102 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'user_navigation.html' %}
+
+<marquee class="job-details-marquee">
+    Job Details
+</marquee>
+
+<hr>
+<div class="container shadow-lg py-4 mb-4 custom-container">
+    <div class="row align-items-center">
+        <div class="col-md-4 text-center">
+            <img src="{{ job.image.url }}" class="img-fluid" alt="{{ job.title }}" style="max-width: 300px; max-height: 200px;">
+        </div>
+        
+        <div class="col-md-8">
+            <h2 class="job-title">{{ job.title }}</h2>
+            <p>
+                {{ job.recruiter.company }}
+                <em> <a href="{% url 'user_latestjobs' %}">(View All Jobs)</a></em>
+            </p>
+            <p class="job-meta">
+                <a href="#" class="mr-2"><i class="fa fa-map-marker"></i> {{ job.location }}</a>
+                <a href="#" class="mr-2"><i class="fa fa-calendar"></i> {{ job.creationdate }}</a>
+            </p>
+            <p>
+                <strong>
+                    <i class="fa fa-money mr-2"></i>{{ job.salary }}
+                </strong>
+            </p>
+            <div class="mt-4">
+                <a href="{% url 'applyforjob' job.id %}" class="btn btn-danger btn-lg custom-btn">Apply for this job</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4 job-overview">
+        <h4>Overview</h4>
+        <p>{{ job.description }}</p>
+        
+        <h4>Required Experience</h4>
+        <p>{{ job.experience }} Yrs</p>
+        
+        <h4>Skills Required</h4>
+        <p>{{ job.skills }}</p>
+        
+        <h4>Start Date for Applying</h4>
+        <p>{{ job.start_date }}</p>
+        
+        <h4>Last Date for Applying</h4>
+        <p>{{ job.end_date }}</p>
+    </div>
+</div>
+
+<style>
+    .job-details-marquee {
+        font-family: 'Monotype Corsiva';
+        font-size: 25px;
+        color: darkcyan;
+        background-color: black;
+        font-weight: bold;
+        margin-top: 1%;
+        padding: 10px;
+    }
+
+    .custom-container {
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .job-title {
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .job-meta {
+        font-size: 16px;
+        color: #666;
+    }
+
+    .custom-btn {
+        width: 200px;
+        height: 45px;
+        font-size: 18px;
+    }
+
+    .job-overview h4 {
+        margin-top: 20px;
+        color: #007bff;
+    }
+
+    .job-overview p {
+        color: #555;
+    }
+</style>
+
+{% endblock %}
